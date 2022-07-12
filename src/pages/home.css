@@ -1,0 +1,23 @@
+.mapboxgl-map {
+    position: fixed!important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+}
+
+.data-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 8px;
+}
+
+.data {
+    background: var(--background_light);
+    border-radius: 12px;
+}

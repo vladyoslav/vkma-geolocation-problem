@@ -1,6 +1,7 @@
-import { FC } from 'react';
-import { Epic, Match } from '@itznevikat/router';
+import { SnackbarValue, snackbarAtom } from '@/components/snackbar/store';
 import { useAtomValue } from '@mntm/precoil';
+import { FC } from 'react';
+import { Match } from '@itznevikat/router';
 import {
   PanelHeader,
   SplitCol,
@@ -9,11 +10,6 @@ import {
   ViewWidth,
   useAdaptivity
 } from '@vkontakte/vkui';
-
-import { SnackbarValue, snackbarAtom } from '@/components/snackbar';
-
-import { AdaptivitySidebar } from './sidebar';
-import { AdaptivityTabbar } from './tabbar';
 
 import styles from './layout.module.css';
 
@@ -29,11 +25,9 @@ type AdaptivityLayoutProps = SplitLayoutProps & {
 
 export const AdaptivityLayout: FC<AdaptivityLayoutProps> = ({
   children,
-  buttons,
   ...rest
 }) => {
   const { viewWidth } = useAdaptivity();
-
   const snackbar: SnackbarValue = useAtomValue(snackbarAtom);
   const desktop: boolean = viewWidth >= ViewWidth.SMALL_TABLET;
 
@@ -50,19 +44,9 @@ export const AdaptivityLayout: FC<AdaptivityLayoutProps> = ({
           width={desktop ? '650px' : '100%'}
           maxWidth={desktop ? '650px' : '100%'}
         >
-          <Epic
-            nav="/"
-            tabbar={
-              !desktop && buttons && <AdaptivityTabbar buttons={buttons} />
-            }
-          >
-            {children}
-          </Epic>
-
+          {children}
           {snackbar}
         </SplitCol>
-
-        {desktop && buttons && <AdaptivitySidebar buttons={buttons} />}
       </SplitLayout>
     </Match>
   );

@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { Root, createRoot } from 'react-dom/client';
 
 import { App } from '@/app';

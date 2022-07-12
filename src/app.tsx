@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { VKUpdateConfigData, send, subscribe } from '@vkontakte/vk-bridge';
+import bridge, { VKUpdateConfigData } from '@vkontakte/vk-bridge';
 import {
   AdaptivityProvider,
   AppRoot,
@@ -15,6 +15,7 @@ import { Layout } from '@/layout';
 
 import '@/app.css';
 import '@vkontakte/vkui/dist/vkui.css';
+import { MapProvider } from 'react-map-gl';
 
 export const App: FC = () => {
   const [platform, setPlatform] = useState<Platform>(currentPlatform);
@@ -27,16 +28,16 @@ export const App: FC = () => {
       if (appearance) setAppearance(appearance);
     }
 
-    send('VKWebAppGetConfig').then((config) => {
+    bridge.send('VKWebAppGetConfig').then((config) => {
       updateConfig(config as VKUpdateConfigData);
 
-      subscribe(({ detail: { type, data } }) => {
+      bridge.subscribe(({ detail: { type, data } }) => {
         if (type === 'VKWebAppUpdateConfig')
           updateConfig(data as VKUpdateConfigData);
       });
     });
 
-    send('VKWebAppInit');
+    bridge.send('VKWebAppInit');
   }, []);
 
   useEffect(() => {
@@ -58,7 +59,9 @@ export const App: FC = () => {
     >
       <AdaptivityProvider>
         <AppRoot noLegacyClasses>
-          <Layout />
+          <MapProvider>
+            <Layout />
+          </MapProvider>
         </AppRoot>
       </AdaptivityProvider>
     </ConfigProvider>

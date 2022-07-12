@@ -15,11 +15,13 @@
     "@itznevikat/router": "0.1.0-beta23",
     "@mntm/precoil": "^5.0.0-rc.0",
     "@vkontakte/icons": "^1.176.0",
-    "@vkontakte/vk-bridge": "npm:@mntm/painless-bridge@3.1.0",
+    "@vkontakte/vk-bridge": "^2.6.4",
     "@vkontakte/vkjs": "^0.22.2",
     "@vkontakte/vkui": "^4.33.3",
+    "mapbox-gl": "^2.9.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-map-gl": "^7.0.17"
   },
   "devDependencies": {
     "@types/react": "^17.0.47",
